@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<style>
+    #main_panel {
+        position: absolute;
+        left: 30%;
+    }
+</style>
+
+<div id="main_panel">
+    <input type="url" name="url_for_shortening" id="url_for_shortening" size="50">
+    <button onclick="process_url()">Shorten</button>
+    <p>Your shorten link:</p>
+    <a id="view_shorten_url" href=""></a>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script type="text/javascript">
+
+var url_from_input;
+
+function process_url() {
+    url_from_input = document.getElementById('url_for_shortening').value;
+    $.ajax({
+        url: "{% url 'url_shortener:process_url' %}",
+        data: {'url': url_from_input},
+        dataType: 'json',
+        success: function (data) {
+            document.getElementById('view_shorten_url').innerHTML = data.shorten_url;
+            document.getElementById('view_shorten_url').href = data.original_url;
+        }
+    });
+}
+
+</script>
+
+{% endblock %}
