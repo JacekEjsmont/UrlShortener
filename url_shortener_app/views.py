@@ -13,19 +13,15 @@ def index(request):
 
 def process_url(request):
     original_url = request.GET.get('url')
-    print(original_url)
     try:
         url_in_database = ShortUrl.objects.get(original_url=original_url)
-        print('try')
-        data = {'shorten_url': 'http://127.0.0.1:8000/urlshort/' + url_in_database.short}
+        data = {'shorten_url': url_in_database.shorted_url}
 
     except:
         short = random.randint(0, 100000000)
         short = str(short)
-        print('except')
-        ShortUrl.objects.create(short=short, original_url=original_url)
-        data = {'shorten_url': 'http://127.0.0.1:8000/urlshort/' + short}
-
+        ShortUrl.objects.create(short=short, shorted_url='https://urlje.herokuapp.com/urlshort/' + short, original_url=original_url)
+        data = {'shorten_url': 'https://urlje.herokuapp.com/urlshort/' + short}
     return JsonResponse(data)
 
 
