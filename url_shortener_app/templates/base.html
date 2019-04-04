@@ -1,18 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<link href='https://fonts.googleapis.com/css?family=Allan' rel='stylesheet'>
 <style>
     body {
-        background-color: skyblue;
+        background-color: darkslategray;
     }
+
+    #bar {
+        background-color: black;
+        width: 100%;
+        height: 30px;
+        top:0;
+    }
+
+    #nav_link {
+        text-align: center;
+        text-decoration: none;
+    }
+
+    #welcome_text {
+        color: white;
+        font-family: 'Allan';font-size: 22px;
+    }
+
 </style>
 
 <head>
     <meta charset="UTF-8">
     <title>UrlShortener</title>
 </head>
+
 <body>
-    <h1>Hello to Url Shortener</h1>
+    <div id="bar">
+        <a id="nav_link" href="{% url 'url_shortener:home' %}">
+            <p id="welcome_text">Hello to Url Shortener</p>
+        </a>
+    </div>
+
     {% block content %}
     {% endblock %}
 </body>

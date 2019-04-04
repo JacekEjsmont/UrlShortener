@@ -8,14 +8,33 @@
         position: absolute;
         left: 30%;
     }
+
+    #shortening_button {
+        background-color: maroon;
+        border: none;
+        color: white;
+    }
+
+    #view_shorten_url {
+        color: black;
+    }
+
+    .main_font_style {
+        font-family: 'Allan';font-size: 22px;
+    }
 </style>
 
+<p></p>
 <div id="main_panel">
+    <p class="main_font_style">Paste our link below</p>
+
     <input type="url" name="url_for_shortening" id="url_for_shortening" size="50">
-    <button onclick="process_url()">Shorten</button>
-    <p>Your shorten link:</p>
+    <button id="shortening_button" onclick="process_url()">Shorten</button>
+
+    <p class="main_font_style">Your shorten link:</p>
     <a id="view_shorten_url" href=""></a>
 </div>
+
 
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script type="text/javascript">
@@ -30,7 +49,7 @@ function process_url() {
         dataType: 'json',
         success: function (data) {
             document.getElementById('view_shorten_url').innerHTML = data.shorten_url;
-            document.getElementById('view_shorten_url').href = data.original_url;
+            document.getElementById('view_shorten_url').href = data.shorten_url;
         }
     });
 }
